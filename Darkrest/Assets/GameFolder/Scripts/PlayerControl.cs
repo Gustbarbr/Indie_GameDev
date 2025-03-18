@@ -6,14 +6,14 @@ public class PlayerControl : MonoBehaviour
 {
 
     private float velocity = 5f;
-    public float jumpForce; // [APLICAR VOO]
+    private float jumpForce = 10f; // [APLICAR PULO]
     private Animator animator;
-    private float horizontalMovement;
+    Rigidbody2D rb;
 
     void Start()
     {
         // Aplica a física
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         // Impede o player de deslizar, setando a velocidade inicial para 0
         rb.velocity = Vector2.zero;
         animator = rb.GetComponent<Animator>();
@@ -22,35 +22,39 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        PlayerMovement();
+        PlayerJump();
+    }
 
-        // Pega o input Horizontal, que pode ser mudado em: Edit -> Project Settings -> Input Manager -> Axis -> Horizontal
-        // Pega o valor absoluto dos inputs, sem que o horizontalMovement cresça até 1, mas sim é setado em um enquanto segurar a tecla
-        if (Input.GetKey("d"))
+    void PlayerMovement()
+    {
+        // Stores in a variable the value of horizontal movement, with no smoothing (only possible values: -1, 0, 1)
+        float horizontalMovement = Input.GetAxisRaw("Horizontal");
+
+        // Aplies tthe direction and speed into the rigidbody when pressing the horizontal keys
+        rb.velocity = new Vector2(horizontalMovement * velocity, rb.velocity.y);
+
+        // Used to change character skin facing direction
+        if (horizontalMovement == 1)
         {
             transform.localScale = new Vector3(2f, 2f, 1f);
-            horizontalMovement = 1f;
         }
-        else if (Input.GetKey("a"))
-        {
+        else if (horizontalMovement == -1) {
+
             transform.localScale = new Vector3(-2f, 2f, 1f);
-            horizontalMovement = -1f;
-        }
-        else
-        {
-            horizontalMovement = 0f;
         }
 
-
-        // faz com que somente se mova no eixo X, por isso o Y é 0
-        Vector2 movement = new Vector2(horizontalMovement * velocity, rb.velocity.y);
-
-        // Ajusta a velocidade do rigidbody, mantendo a velocidade do y
-        rb.velocity = movement;
-
+        // The Mathf.Abs make the Animator "walk" animation work, togheter with the LocalScale manipulation, the animation is applied to the left and to the right
         animator.SetFloat("Speed", Mathf.Abs(horizontalMovement));
+    }
 
-        
-
+    void PlayerJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Pass the jump amount straight to the rigidbody, without needing to declare a new vector2
+            // ForceMode2D applies physics forces, in a incremental way, and Impulse make this forces apply an immediate impulse to the rigidbody
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
 }
