@@ -55,6 +55,7 @@ public class PlayerControl : MonoBehaviour
             // Pass the jump amount straight to the rigidbody, without needing to declare a new vector2
             // ForceMode2D applies physics forces, in a incremental way, and Impulse make this forces apply an immediate impulse to the rigidbody
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            //animator.SetBool("Jump", true);
         }
     }
 }

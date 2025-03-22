@@ -23,6 +23,9 @@ TextureImporter:
   - first:
       213: -7446026091647042388
     second: Player_6
+  - first:
+      213: 5938012242645255967
+    second: Player_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -66,7 +69,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
@@ -277,10 +280,31 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f178aca7cae086250800000000000000
+      internalID: 5938012242645255967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 88a718b32454d4545986141ab0e6561f
+    spriteID: 4b3c691d201d4d14d89563aed574857a
     internalID: 0
     vertices: []
     indices: 
@@ -295,6 +319,7 @@ TextureImporter:
       Player_4: -4709456396536258026
       Player_5: -4529042392078601758
       Player_6: -7446026091647042388
+      Player_7: 5938012242645255967
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
