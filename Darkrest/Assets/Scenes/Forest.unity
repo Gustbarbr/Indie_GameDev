@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 186807825}
   m_Layer: 0
   m_Name: Skin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -291,6 +291,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4a5d6a2e2866a458f066938a966c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocity: 5
+  groundDistance: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  buttonPressingTime: 0.3
+  jumpForce: 10
+  fireballPrefab: {fileID: 4073593981520002720, guid: 77df3c357631c074db8f0e9e678a11e8, type: 3}
 --- !u!50 &186807824
 Rigidbody2D:
   serializedVersion: 4
@@ -306,7 +314,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 2
+  m_GravityScale: 10
   m_Material: {fileID: 6200000, guid: 39513a3ce7557794fb46a0b12c8b1f98, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -589,7 +597,7 @@ GameObject:
   - component: {fileID: 1137450379}
   - component: {fileID: 1137450378}
   - component: {fileID: 1137450377}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
