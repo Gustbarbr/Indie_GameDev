@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -23,12 +24,11 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject fireballPrefab;
 
+    public Slider manaSlider;
 
     void Start()
     {
-        // Aplica a física
         rb = GetComponent<Rigidbody2D>();
-        // Impede o player de deslizar, setando a velocidade inicial para 0
         rb.velocity = Vector2.zero;
         animator = rb.GetComponent<Animator>();
     }
@@ -39,6 +39,12 @@ public class PlayerControl : MonoBehaviour
         PlayerMovement();
         PlayerJump();
         Fireball();
+
+        // Recharges mana overtime
+        if (manaSlider.value < 1f)
+        {
+            manaSlider.value += Time.deltaTime / 20;
+        }
     }
 
     void PlayerMovement()
@@ -94,13 +100,20 @@ public class PlayerControl : MonoBehaviour
 
     void Fireball()
     {
+        // The spells recharge overtime
         spellRecharge += Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire1") && spellRecharge > cooldown)
+        // Only attacks if the button is pressed, and is off cooldown time and has mana
+        if (Input.GetButtonDown("Fire1") && spellRecharge > cooldown && manaSlider.value >= 0.2f)
         {
+            // Instantiate the fireball prefab
             Instantiate(fireballPrefab, transform.position, transform.rotation);
+            // Activates the animation
             animator.SetBool("Attack", true);
+            // Enters in recharge time
             spellRecharge = 0;
+            // Uses mana to perform an attack
+            manaSlider.value -= 0.2f;
         }
         else
         {
