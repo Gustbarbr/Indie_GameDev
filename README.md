@@ -1,4 +1,4 @@
-# Indie Game Deveçopment
+# Indie Game Development
 Repository for the games created by myself.
 
 **DARKREST**
